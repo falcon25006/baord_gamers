@@ -1,0 +1,112 @@
+body,html{
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: linear-gradient(to top, #e9eef3 0%, hsl(0, 41%, 97%) 100%);
+}
+.photos img{
+    width: 250px;
+    height: 250px;
+
+}
+.container{
+    margin: 75px 0 0 200px;
+    margin-bottom:100px ;
+    width: 85%;
+    height:450px;
+   justify-content: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+
+}
+.container img{
+    width: 8%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 2px solid rgb(73, 55, 162);
+    transition: all ease-in-out 0.5s;
+
+}
+.container img:hover{
+    width: 18%;
+}
+p{
+    text-align: justify;
+}
+.histoire{
+   margin: 35px 50px 50px 65px ;
+   display: flex;
+   gap: 4%;
+
+}
+.histoire1,.histoire2{
+    width: 45%;
+    border: 3px rgb(56, 113, 105) solid;
+    padding: 15px 15px 15px 15px;
+    border-radius: 3%;
+}
+h1{
+    text-align: center;
+
+}
+.joueurs{
+    border: 2px black solid;
+    box-shadow: 4%;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 15px 15px 15px 15px;
+    margin: 50px 30px 30px 30px;
+    border-radius: 17px;
+    gap: 1%;
+    margin-bottom: 100px;
+}
+  
+.photos img {
+
+display: flex;
+flex-wrap: wrap;
+
+border: 1px black solid;
+border-radius:15px ;
+object-fit: cover;
+}
+
+.text{
+width: 73%;
+height: 25%;
+display: flex;
+flex-wrap: wrap;
+border-radius:15px ;
+margin-right: 75px;
+margin-left: 75px;
+}
+.streameur{
+
+display: flex;
+
+margin: 75px 0 0 75px;
+width: 90%;
+height:900px;
+justify-content: center;
+flex-wrap: nowrap;
+
+ border-radius: 7px;
+}
+.personne{
+    display: flex;
+    flex-wrap: wrap;
+    text-wrap: wrap;
+    border: 2px black solid;
+    width: 32%;
+    margin: 15px 15px 15px 15px;
+    border-radius: 15px;
+    padding: 35px 35px 35px 35px ;
+     justify-content: center;
+
+}
+.personne img{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1px rgb(43, 46, 40) solid;
+   
+}
