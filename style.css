@@ -10,17 +10,21 @@ body, html {
 
 /* Styles pour les conteneurs principaux */
 .histoire, .joueurs, .streameur {
-    margin: 20px;
+    margin: 20px ;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
 
 .histoire1, .histoire2, .joueurs, .personne {
-    width: 100%;
+    width: 90%;
     box-sizing: border-box;
     padding: 15px;
     border-radius: 15px;
+    text-align: justify;
+}
+h1{
+    text-align: center;
 }
 
 /* Styles pour les images */
@@ -45,7 +49,8 @@ img {
 }
 
 .container img:hover {
-    transform: scale(1.1);
+
+    transform: scale(1.3);
 }
 
 /* Media queries pour la mise en page responsive */
