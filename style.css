@@ -67,5 +67,6 @@ img {
 @media screen and (min-width: 1024px) {
     .container img {
         width: calc(12.5% - 10px);
+        height: calc(20.5% - 10px)
     }
 }
