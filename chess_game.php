@@ -36,6 +36,9 @@
     </style>
   </head>
   <body>
+<?php
+    include('navbar_connect.php');
+?>
     <h1>Jeu d'Échecs en Ligne</h1>
     <div class="chess-board" id="chessBoard"></div>
 

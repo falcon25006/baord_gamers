@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<?php
+    include('navbar_connect.php');
+?>   
     <h1>Histoire du Scrabble : Des Origines à Aujourd'hui</h1>
 
     <div class="histoire">
