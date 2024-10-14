@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jeu d'Échecs en Ligne</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
       .chess-board {
         width: 400px;
@@ -36,9 +37,18 @@
     </style>
   </head>
   <body>
-<?php
-    include('navbar_connect.php');
-?>
+        <!-- ajout de la navbar -->
+        <div id="navbar-placeholder"></div>
+
+        <script>
+          fetch('navbar_connect.html')
+            .then(response => response.text())
+            .then(data => {
+              document.getElementById('navbar-placeholder').innerHTML = data;
+            });
+        </script>
+        <!-- fin -->
+ <div class="container" style="margin-top: 70px"><!-- la div c'est pour éviter de cacher la haut du site prière d'écrire la suite du code à l'intérieur-->         
     <h1>Jeu d'Échecs en Ligne</h1>
     <div class="chess-board" id="chessBoard"></div>
 
@@ -237,6 +247,11 @@
       }
 
       createBoard();
+    </script>
+ </div><!-- fin de la div container -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+    crossorigin="anonymous">
     </script>
   </body>
 </html>
