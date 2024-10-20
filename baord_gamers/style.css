@@ -41,7 +41,7 @@ img {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 13px;
     margin: 20px 0;
 }
 
