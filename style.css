@@ -34,7 +34,7 @@ p,h1,h2,h3,h4,h5 {
     word-spacing: normal;
     letter-spacing: normal;
     line-height: 1.6; /* Ajuster la hauteur de ligne pour améliorer la lisibilité */
-    
+    hyphens: auto;
   }
 /* Styles pour les images */
 img {
