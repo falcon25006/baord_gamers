@@ -29,7 +29,13 @@ h1{
 h2{
     margin-bottom: 2.5%;
 }
+p,h1,h2,h3,h4,h5 {
+    text-align: left;
+    word-spacing: normal;
+    letter-spacing: normal;
+    line-height: 1.6; /* Ajuster la hauteur de ligne pour améliorer la lisibilité */
 
+  }
 /* Styles pour les images */
 img {
     max-width: 100%;
@@ -44,6 +50,7 @@ img {
     gap: 13px;
     margin: 20px 0;
 }
+
 
 .container img {
     width: calc(25% - 10px);
@@ -64,7 +71,7 @@ img {
 
 .container img:hover {
 
-    transform: scale(1.5);
+    transform: scale(2.2);
 }
 
 /* Media queries pour la mise en page responsive */
