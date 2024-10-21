@@ -51,6 +51,7 @@ img {
     margin: 20px 0;
 }
 
+
 .container img {
     width: calc(25% - 10px);
     height: calc(50% - 10px);
@@ -70,7 +71,7 @@ img {
 
 .container img:hover {
 
-    transform: scale(1.5);
+    transform: scale(2.2);
 }
 
 /* Media queries pour la mise en page responsive */

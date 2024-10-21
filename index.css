@@ -3,14 +3,11 @@ body
     background-color:rgb(28, 7, 47); 
     color:#ffffff; 
 }
-.container
+.accueil 
 {
  font-family:'Times New Roman', Times, serif;
-
+ width: 75px;
 }
-
-
-    
 
 p,h1,h2,h3,h4,h5 {
     text-align: left;
@@ -19,5 +16,6 @@ p,h1,h2,h3,h4,h5 {
     line-height: 1.6; /* Ajuster la hauteur de ligne pour améliorer la lisibilité */
     font-family:'Times New Roman', Times, serif;
     font-weight:bold;
+    
     
   }
