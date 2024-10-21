@@ -30,10 +30,11 @@ h2{
     margin-bottom: 2.5%;
 }
 p,h1,h2,h3,h4,h5 {
-    text-align: left;
+    text-align: justify;
     word-spacing: normal;
     letter-spacing: normal;
     line-height: 1.6; /* Ajuster la hauteur de ligne pour améliorer la lisibilité */
+    hyphens: auto;
   }
 /* Styles pour les images */
 img {
