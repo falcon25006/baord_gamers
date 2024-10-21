@@ -26,7 +26,16 @@ body, html {
 h1{
     text-align: center;
 }
+h2{
+    margin-bottom: 2.5%;
+}
+p,h1,h2,h3,h4,h5 {
+    text-align: left;
+    word-spacing: normal;
+    letter-spacing: normal;
+    line-height: 1.6; /* Ajuster la hauteur de ligne pour améliorer la lisibilité */
 
+  }
 /* Styles pour les images */
 img {
     max-width: 100%;
@@ -38,9 +47,10 @@ img {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 13px;
     margin: 20px 0;
 }
+
 
 .container img {
     width: calc(25% - 10px);
@@ -49,12 +59,19 @@ img {
     transition: all ease-in-out 0.3s;
 
 }
+.container1 {
+    display: flex;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
 
 
 
 .container img:hover {
 
-    transform: scale(1.5);
+    transform: scale(2.2);
 }
 
 /* Media queries pour la mise en page responsive */
