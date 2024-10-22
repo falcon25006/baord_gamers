@@ -14,7 +14,7 @@
 
     <script>
       fetch('navbar_connect.html')
-        .then(response => response.text())
+        .then(response => response.text())  
         .then(data => {
           document.getElementById('navbar-placeholder').innerHTML = data;
         });
