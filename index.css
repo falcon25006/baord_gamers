@@ -6,9 +6,8 @@ body
 .accueil 
 {
  font-family:'Times New Roman', Times, serif;
- width: 75px;
+ width: 75%;
 }
-
 p,h1,h2,h3,h4,h5 {
     text-align: left;
     word-spacing: normal;
@@ -16,6 +15,4 @@ p,h1,h2,h3,h4,h5 {
     line-height: 1.6; /* Ajuster la hauteur de ligne pour améliorer la lisibilité */
     font-family:'Times New Roman', Times, serif;
     font-weight:bold;
-    
-    
-  }
+  } 
