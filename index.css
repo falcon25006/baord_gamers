@@ -6,27 +6,13 @@ body
 .accueil 
 {
  font-family:'Times New Roman', Times, serif;
- width: 75px;
- width:75%;
-}
-@media (max-width:1440px){
-    .accueil {
-        width:75%;
-    }
-}
-@media (max-width:760px) {
-    .accueil {
-        width:100%;
-    }
+ width: 75%;
 }
 p,h1,h2,h3,h4,h5 {
-    text-align:start;
+    text-align: left;
     word-spacing: normal;
     letter-spacing: normal;
     line-height: 1.6; /* Ajuster la hauteur de ligne pour améliorer la lisibilité */
     font-family:'Times New Roman', Times, serif;
     font-weight:bold;
-       
-  }
-
-
+  } 
