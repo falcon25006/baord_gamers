@@ -8,16 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-     <!-- ajout de la navbar -->
-     <div id="navbar-placeholder"></div>
-
-     <script>
-       fetch('navbar_connect.html')
-         .then(response => response.text())
-         .then(data => {
-           document.getElementById('navbar-placeholder').innerHTML = data;
-         });
-     </script>
+    
      <div class="head" style="margin-top:70px">
         <h1>ACTIVITIES OF BAORD GAMERS CLUB</h1>
         <P><h2>The Baord Gamers club </h2>  Une iniciative des étudiants de
@@ -48,8 +39,8 @@
         <h3>EPO CHESS TOUR </h3> 
         <P> L'EPO CHESS TOUR est un tournois d'échecs organiser chaque années au sein de l'EPO
             pour stimuler la pratique de ce sport fort passionnant la première édition du tournois
-            a eu lieu en 2024 avec 7 participants inscrit avec 3 participations éffectives
-            mais loin de nous décourrager nous  continuons  à avancer et comptons sur votre
+            a eu lieu en 2024 avec 7 participants inscrit et 3 participations éffectives
+            mais loin de nous décourager nous  continuons  à avancer et comptons sur votre
             soutien pour que l' édition de 2025 soit un franc succès. 
           </P> 
     </div>
@@ -58,6 +49,7 @@
     <img src="images/image_activitées/chess_tour1.jpg" alt="">
     <img src="images/image_activitées/chess_tour2.jpg" alt="">
     <img src="images/image_activitées/chess_tour3.jpg" alt="">
+
     <h2>Les tournois de la fédération burkinabè d'échecs</h2>
     <img src="images/image_activitées/tournois_mensuel4.jpg" alt="">
     <img src="images/image_activitées/tournois_nal.jpg" alt="">
@@ -69,6 +61,16 @@
     <img src="images/image_activitées/usubf1.jpg" alt="">
     
      </div>
+      <!-- ajout de la navbar -->
+      <div id="navbar-placeholder"></div>
+
+      <script>
+        fetch('navbar_connect.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+          });
+      </script>
 
 </body>
 </html>

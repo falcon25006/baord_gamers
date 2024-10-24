@@ -8,17 +8,7 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-        <!-- ajout de la navbar -->
-        <div id="navbar-placeholder"></div>
-
-        <script>
-          fetch('navbar_connect.html')
-            .then(response => response.text())
-            .then(data => {
-              document.getElementById('navbar-placeholder').innerHTML = data;
-            });
-        </script>
-        <!-- fin -->
+       
  <div class="head" style="margin-top: 70px"><!-- la div c'est pour éviter de cacher la haut du site prière d'écrire la suite du code à l'intérieur-->
         
     <h1>
@@ -284,5 +274,16 @@ la popularité des échecs a explosé. Kévin Bordi continue aujourd’hui de pr
   integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
   crossorigin="anonymous">
   </script>
+   <!-- ajout de la navbar -->
+   <div id="navbar-placeholder"></div>
+
+   <script>
+     fetch('navbar_connect.html')
+       .then(response => response.text())
+       .then(data => {
+         document.getElementById('navbar-placeholder').innerHTML = data;
+       });
+   </script>
+   <!-- fin -->
   </body>
 </html>
