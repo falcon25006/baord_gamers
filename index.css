@@ -8,11 +8,6 @@ body
  font-family:'Times New Roman', Times, serif;
  width: 75%;
 }
-@media (max-width:760px){
-    .accueil{
-        width:auto;
-    }
-}
 p,h1,h2,h3,h4,h5 {
     text-align: left;
     word-spacing: normal;
@@ -68,9 +63,17 @@ p,h1,h2,h3,h4,h5 {
         flex-direction: column;
         text-align: center;
     }
-
+}
     .footer-links {
         margin-top: 15px;
-        justify-content: center;
+        justify-content: center;}
+
+.accueil {
+    width:75%;
+}
+@media (max-width:760px){
+    .accueil {
+        width:auto;
+
     }
 }
