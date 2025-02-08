@@ -49,5 +49,43 @@
     <div class="histoire">
         <p>Aujourd'hui, le Scrabble continue d'évoluer avec l'ère numérique. Des applications mobiles et des versions en ligne ont rendu le jeu plus accessible que jamais, permettant aux joueurs du monde entier de s'affronter. Les tournois en ligne et les compétitions internationales maintiennent l'intérêt pour ce jeu classique, qui reste un défi intellectuel et linguistique apprécié par des millions de personnes.</p>
     </div>
+      <script>
+        function showPopup() {
+          Swal.fire({
+            title: "EPO CHESS TOURNAMENT",
+            html: `
+              <p>Inscrivez-vous vite!</p>
+              <img src="images/image_échecs/background.png" alt="Exemple" style="width:200px; border-radius:10px;">
+              <br><br>
+               <p>Plus d'info dans l'onglet tournois</p>
+            `,
+            showConfirmButton: false,
+            showCloseButton: true,
+            heightAuto: false, // Augmenter la hauteur de la pop-up
+          });
+        }
+  
+        function schedulePopups(initialDelay, increment) {
+          let delay = initialDelay;
+          let count = 1;
+  
+          function scheduleNextPopup() {
+            setTimeout(() => {
+              showPopup();
+              delay += increment * count;
+              count++;
+              scheduleNextPopup();
+            }, delay);
+          }
+  
+          scheduleNextPopup();
+        }
+  
+        document.addEventListener("DOMContentLoaded", () => {
+          setTimeout(() => {
+            showPopup();
+            schedulePopups(120000, 240000,500000); // 2minute initial delay, 4 minutes increment
+          }, 5000); // Initial pop-up after 5 seconds
+        });</script>
 </body>
 </html>

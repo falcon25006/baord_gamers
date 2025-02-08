@@ -4,7 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jeu d'Échecs en Ligne</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
     <style>
       .chess-board {
         width: 400px;
@@ -35,223 +40,276 @@
         background-color: #ff7f50;
       }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
-        <!-- ajout de la navbar -->
-        <div id="navbar-placeholder"></div>
-
-        <script>
-          fetch('navbar_connect.html')
-            .then(response => response.text())
-            .then(data => {
-              document.getElementById('navbar-placeholder').innerHTML = data;
-            });
-        </script>
-        <!-- fin -->
- <div class="head" style="margin-top: 70px"><!-- la div c'est pour éviter de cacher la haut du site prière d'écrire la suite du code à l'intérieur-->         
-    <h1>Jeu d'Échecs en Ligne</h1>
-    <div class="chess-board" id="chessBoard"></div>
+    <!-- ajout de la navbar -->
+    <div id="navbar-placeholder"></div>
 
     <script>
-      const board = document.getElementById("chessBoard");
-      const pieces = {
-        r: "♜",
-        n: "♞",
-        b: "♝",
-        q: "♛",
-        k: "♚",
-        p: "♟",
-        R: "♖",
-        N: "♘",
-        B: "♗",
-        Q: "♕",
-        K: "♔",
-        P: "♙",
-      };
-      let gameState = [
-        ["r", "n", "b", "q", "k", "b", "n", "r"],
-        ["p", "p", "p", "p", "p", "p", "p", "p"],
-        [" ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " "],
-        ["P", "P", "P", "P", "P", "P", "P", "P"],
-        ["R", "N", "B", "Q", "K", "B", "N", "R"],
-      ];
-      let selectedPiece = null;
-      let currentPlayer = "white";
+      fetch("navbar_connect.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+        });
+    </script>
+    <!-- fin -->
+    <div class="head" style="margin-top: 70px">
+      <!-- la div c'est pour éviter de cacher la haut du site prière d'écrire la suite du code à l'intérieur-->
+      <h1>Jeu d'Échecs en Ligne</h1>
+      <div class="chess-board" id="chessBoard"></div>
 
-      function createBoard() {
-        board.innerHTML = "";
-        for (let row = 0; row < 8; row++) {
-          for (let col = 0; col < 8; col++) {
-            const square = document.createElement("div");
-            square.classList.add("square");
-            square.classList.add((row + col) % 2 === 0 ? "white" : "black");
-            const piece = gameState[row][col];
-            if (piece !== " ") {
-              square.textContent = pieces[piece];
+      <script>
+        const board = document.getElementById("chessBoard");
+        const pieces = {
+          r: "♜",
+          n: "♞",
+          b: "♝",
+          q: "♛",
+          k: "♚",
+          p: "♟",
+          R: "♖",
+          N: "♘",
+          B: "♗",
+          Q: "♕",
+          K: "♔",
+          P: "♙",
+        };
+        let gameState = [
+          ["r", "n", "b", "q", "k", "b", "n", "r"],
+          ["p", "p", "p", "p", "p", "p", "p", "p"],
+          [" ", " ", " ", " ", " ", " ", " ", " "],
+          [" ", " ", " ", " ", " ", " ", " ", " "],
+          [" ", " ", " ", " ", " ", " ", " ", " "],
+          [" ", " ", " ", " ", " ", " ", " ", " "],
+          ["P", "P", "P", "P", "P", "P", "P", "P"],
+          ["R", "N", "B", "Q", "K", "B", "N", "R"],
+        ];
+        let selectedPiece = null;
+        let currentPlayer = "white";
+
+        function createBoard() {
+          board.innerHTML = "";
+          for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+              const square = document.createElement("div");
+              square.classList.add("square");
+              square.classList.add((row + col) % 2 === 0 ? "white" : "black");
+              const piece = gameState[row][col];
+              if (piece !== " ") {
+                square.textContent = pieces[piece];
+              }
+              square.addEventListener("click", () =>
+                handleSquareClick(row, col)
+              );
+              board.appendChild(square);
             }
-            square.addEventListener("click", () => handleSquareClick(row, col));
-            board.appendChild(square);
           }
         }
-      }
 
-      function handleSquareClick(row, col) {
-        const piece = gameState[row][col];
-        if (selectedPiece) {
-          if (isValidMove(selectedPiece.row, selectedPiece.col, row, col)) {
-            movePiece(selectedPiece.row, selectedPiece.col, row, col);
-            selectedPiece = null;
-            currentPlayer = currentPlayer === "white" ? "black" : "white";
-          } else {
-            selectedPiece = null;
+        function handleSquareClick(row, col) {
+          const piece = gameState[row][col];
+          if (selectedPiece) {
+            if (isValidMove(selectedPiece.row, selectedPiece.col, row, col)) {
+              movePiece(selectedPiece.row, selectedPiece.col, row, col);
+              selectedPiece = null;
+              currentPlayer = currentPlayer === "white" ? "black" : "white";
+            } else {
+              selectedPiece = null;
+            }
+            createBoard();
+          } else if (piece !== " " && isPieceOfCurrentPlayer(piece)) {
+            selectedPiece = { row, col };
+            highlightPossibleMoves(row, col);
           }
-          createBoard();
-        } else if (piece !== " " && isPieceOfCurrentPlayer(piece)) {
-          selectedPiece = { row, col };
-          highlightPossibleMoves(row, col);
         }
-      }
 
-      function isValidMove(fromRow, fromCol, toRow, toCol) {
-        const piece = gameState[fromRow][fromCol];
-        const toPiece = gameState[toRow][toCol];
+        function isValidMove(fromRow, fromCol, toRow, toCol) {
+          const piece = gameState[fromRow][fromCol];
+          const toPiece = gameState[toRow][toCol];
 
-        if (toPiece !== " " && isPieceOfCurrentPlayer(toPiece)) {
+          if (toPiece !== " " && isPieceOfCurrentPlayer(toPiece)) {
+            return false;
+          }
+
+          switch (piece.toLowerCase()) {
+            case "p":
+              return isPawnMove(fromRow, fromCol, toRow, toCol);
+            case "r":
+              return isRookMove(fromRow, fromCol, toRow, toCol);
+            case "n":
+              return isKnightMove(fromRow, fromCol, toRow, toCol);
+            case "b":
+              return isBishopMove(fromRow, fromCol, toRow, toCol);
+            case "q":
+              return isQueenMove(fromRow, fromCol, toRow, toCol);
+            case "k":
+              return isKingMove(fromRow, fromCol, toRow, toCol);
+          }
+        }
+
+        function isPawnMove(fromRow, fromCol, toRow, toCol) {
+          const direction = currentPlayer === "white" ? -1 : 1;
+          const startRow = currentPlayer === "white" ? 6 : 1;
+
+          if (fromCol === toCol) {
+            if (
+              fromRow + direction === toRow &&
+              gameState[toRow][toCol] === " "
+            ) {
+              return true;
+            }
+            if (
+              fromRow === startRow &&
+              fromRow + 2 * direction === toRow &&
+              gameState[fromRow + direction][toCol] === " " &&
+              gameState[toRow][toCol] === " "
+            ) {
+              return true;
+            }
+          } else if (
+            Math.abs(fromCol - toCol) === 1 &&
+            fromRow + direction === toRow
+          ) {
+            return (
+              gameState[toRow][toCol] !== " " &&
+              !isPieceOfCurrentPlayer(gameState[toRow][toCol])
+            );
+          }
           return false;
         }
 
-        switch (piece.toLowerCase()) {
-          case "p":
-            return isPawnMove(fromRow, fromCol, toRow, toCol);
-          case "r":
-            return isRookMove(fromRow, fromCol, toRow, toCol);
-          case "n":
-            return isKnightMove(fromRow, fromCol, toRow, toCol);
-          case "b":
-            return isBishopMove(fromRow, fromCol, toRow, toCol);
-          case "q":
-            return isQueenMove(fromRow, fromCol, toRow, toCol);
-          case "k":
-            return isKingMove(fromRow, fromCol, toRow, toCol);
+        function isRookMove(fromRow, fromCol, toRow, toCol) {
+          if (fromRow !== toRow && fromCol !== toCol) return false;
+          const rowStep =
+            fromRow === toRow
+              ? 0
+              : (toRow - fromRow) / Math.abs(toRow - fromRow);
+          const colStep =
+            fromCol === toCol
+              ? 0
+              : (toCol - fromCol) / Math.abs(toCol - fromCol);
+          let currentRow = fromRow + rowStep;
+          let currentCol = fromCol + colStep;
+          while (currentRow !== toRow || currentCol !== toCol) {
+            if (gameState[currentRow][currentCol] !== " ") return false;
+            currentRow += rowStep;
+            currentCol += colStep;
+          }
+          return true;
         }
-      }
 
-      function isPawnMove(fromRow, fromCol, toRow, toCol) {
-        const direction = currentPlayer === "white" ? -1 : 1;
-        const startRow = currentPlayer === "white" ? 6 : 1;
-
-        if (fromCol === toCol) {
-          if (
-            fromRow + direction === toRow &&
-            gameState[toRow][toCol] === " "
-          ) {
-            return true;
-          }
-          if (
-            fromRow === startRow &&
-            fromRow + 2 * direction === toRow &&
-            gameState[fromRow + direction][toCol] === " " &&
-            gameState[toRow][toCol] === " "
-          ) {
-            return true;
-          }
-        } else if (
-          Math.abs(fromCol - toCol) === 1 &&
-          fromRow + direction === toRow
-        ) {
+        function isKnightMove(fromRow, fromCol, toRow, toCol) {
+          const rowDiff = Math.abs(toRow - fromRow);
+          const colDiff = Math.abs(toCol - fromCol);
           return (
-            gameState[toRow][toCol] !== " " &&
-            !isPieceOfCurrentPlayer(gameState[toRow][toCol])
+            (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2)
           );
         }
-        return false;
-      }
 
-      function isRookMove(fromRow, fromCol, toRow, toCol) {
-        if (fromRow !== toRow && fromCol !== toCol) return false;
-        const rowStep =
-          fromRow === toRow ? 0 : (toRow - fromRow) / Math.abs(toRow - fromRow);
-        const colStep =
-          fromCol === toCol ? 0 : (toCol - fromCol) / Math.abs(toCol - fromCol);
-        let currentRow = fromRow + rowStep;
-        let currentCol = fromCol + colStep;
-        while (currentRow !== toRow || currentCol !== toCol) {
-          if (gameState[currentRow][currentCol] !== " ") return false;
-          currentRow += rowStep;
-          currentCol += colStep;
+        function isBishopMove(fromRow, fromCol, toRow, toCol) {
+          if (Math.abs(toRow - fromRow) !== Math.abs(toCol - fromCol))
+            return false;
+          const rowStep = (toRow - fromRow) / Math.abs(toRow - fromRow);
+          const colStep = (toCol - fromCol) / Math.abs(toCol - fromCol);
+          let currentRow = fromRow + rowStep;
+          let currentCol = fromCol + colStep;
+          while (currentRow !== toRow && currentCol !== toCol) {
+            if (gameState[currentRow][currentCol] !== " ") return false;
+            currentRow += rowStep;
+            currentCol += colStep;
+          }
+          return true;
         }
-        return true;
-      }
 
-      function isKnightMove(fromRow, fromCol, toRow, toCol) {
-        const rowDiff = Math.abs(toRow - fromRow);
-        const colDiff = Math.abs(toCol - fromCol);
-        return (
-          (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2)
-        );
-      }
-
-      function isBishopMove(fromRow, fromCol, toRow, toCol) {
-        if (Math.abs(toRow - fromRow) !== Math.abs(toCol - fromCol))
-          return false;
-        const rowStep = (toRow - fromRow) / Math.abs(toRow - fromRow);
-        const colStep = (toCol - fromCol) / Math.abs(toCol - fromCol);
-        let currentRow = fromRow + rowStep;
-        let currentCol = fromCol + colStep;
-        while (currentRow !== toRow && currentCol !== toCol) {
-          if (gameState[currentRow][currentCol] !== " ") return false;
-          currentRow += rowStep;
-          currentCol += colStep;
+        function isQueenMove(fromRow, fromCol, toRow, toCol) {
+          return (
+            isRookMove(fromRow, fromCol, toRow, toCol) ||
+            isBishopMove(fromRow, fromCol, toRow, toCol)
+          );
         }
-        return true;
-      }
 
-      function isQueenMove(fromRow, fromCol, toRow, toCol) {
-        return (
-          isRookMove(fromRow, fromCol, toRow, toCol) ||
-          isBishopMove(fromRow, fromCol, toRow, toCol)
-        );
-      }
+        function isKingMove(fromRow, fromCol, toRow, toCol) {
+          return (
+            Math.abs(toRow - fromRow) <= 1 && Math.abs(toCol - fromCol) <= 1
+          );
+        }
 
-      function isKingMove(fromRow, fromCol, toRow, toCol) {
-        return Math.abs(toRow - fromRow) <= 1 && Math.abs(toCol - fromCol) <= 1;
-      }
+        function movePiece(fromRow, fromCol, toRow, toCol) {
+          gameState[toRow][toCol] = gameState[fromRow][fromCol];
+          gameState[fromRow][fromCol] = " ";
+        }
 
-      function movePiece(fromRow, fromCol, toRow, toCol) {
-        gameState[toRow][toCol] = gameState[fromRow][fromCol];
-        gameState[fromRow][fromCol] = " ";
-      }
+        function isPieceOfCurrentPlayer(piece) {
+          return currentPlayer === "white"
+            ? piece === piece.toUpperCase()
+            : piece === piece.toLowerCase();
+        }
 
-      function isPieceOfCurrentPlayer(piece) {
-        return currentPlayer === "white"
-          ? piece === piece.toUpperCase()
-          : piece === piece.toLowerCase();
-      }
+        function highlightPossibleMoves(row, col) {
+          createBoard();
+          const square = board.children[row * 8 + col];
+          square.classList.add("selected");
 
-      function highlightPossibleMoves(row, col) {
-        createBoard();
-        const square = board.children[row * 8 + col];
-        square.classList.add("selected");
-
-        for (let i = 0; i < 8; i++) {
-          for (let j = 0; j < 8; j++) {
-            if (isValidMove(row, col, i, j)) {
-              const possibleMove = board.children[i * 8 + j];
-              possibleMove.classList.add("possible-move");
+          for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+              if (isValidMove(row, col, i, j)) {
+                const possibleMove = board.children[i * 8 + j];
+                possibleMove.classList.add("possible-move");
+              }
             }
           }
         }
-      }
 
-      createBoard();
-    </script>
- </div><!-- fin de la div container -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-    crossorigin="anonymous">
-    </script>
+        createBoard();
+      </script>
+      <script>
+        function showPopup() {
+          Swal.fire({
+            title: "EPO CHESS TOURNAMENT",
+            html: `
+              <div style="text-align: center;">
+                <p style="text-align: center;">Inscrivez-vous vite!</p>
+                <img src="images/image_échecs/background.png" alt="Exemple" style="width:200px; border-radius:10px;">
+                <br><br>
+                <p style="text-align: center;">Plus d'info dans l'onglet tournois</p>
+              </div>
+            `,
+            showConfirmButton: false,
+            showCloseButton: true,
+            heightAuto: false, // Augmenter la hauteur de la pop-up
+          });
+        }
+
+        function schedulePopups(initialDelay, increment) {
+          let delay = initialDelay;
+          let count = 1;
+
+          function scheduleNextPopup() {
+            setTimeout(() => {
+              showPopup();
+              delay += increment * count;
+              count++;
+              scheduleNextPopup();
+            }, delay);
+          }
+
+          scheduleNextPopup();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+          setTimeout(() => {
+            showPopup();
+            schedulePopups(120000, 240000); // 2 minutes initial delay, 4 minutes increment
+          }, 5000); // Initial pop-up after 5 seconds
+        });
+      </script>
+    </div>
+    <!-- fin de la div container -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cartes Participants</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      .card {
+        width: 250px; /* Augmenter la longueur des cartes */
+        height: 150px; /* Réduire encore la hauteur des cartes */
+        margin: 10px;
+        padding: 10px;
+        background-color: white;
+        border: 5px solid; /* Contour noir épais */
+        border-image: linear-gradient(to bottom, gold, black) 1; /* Dégradé doré vers le noir */
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: inline-block;
+        vertical-align: top;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .card h3 {
+        font-size: 20px; /* Agrandir le nom et prénom */
+        margin: 0;
+      }
+
+      .card p {
+        font-size: 18px; /* Augmenter la taille des identifiants */
+        margin: 0;
+        font-weight: bold;
+        background: linear-gradient(
+          to bottom,
+          gold,
+          black
+        ); /* Dégradé doré vers le noir */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .card .identifier {
+        font-size: 18px; /* Augmenter la taille des identifiants */
+        background: linear-gradient(
+          to bottom,
+          gold,
+          black
+        ); /* Dégradé doré vers le noir */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .card .chess-piece {
+        font-size: 70px; /* Réduire légèrement la taille des pièces d'échecs */
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Liste des 30 participants avec pièces d'échecs -->
+    <script>
+      const pieces = ["♜", "♞", "♝", "♛", "♚", "♟", "♖", "♘"];
+      document.addEventListener("DOMContentLoaded", () => {
+        const cards = document.querySelectorAll(".card");
+        cards.forEach((card, index) => {
+          const pieceElement = card.querySelector(".chess-piece");
+          pieceElement.textContent = pieces[index % pieces.length];
+        });
+      });
+    </script>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>BAKUAN Abass</h3>
+      <p class="identifier">ID: E4F7</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>BAMOGO Saidou</h3>
+      <p class="identifier">ID: E9A3</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>BATIONO Uriel</h3>
+      <p class="identifier">ID: E2B8</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>CISSE Abdoul</h3>
+      <p class="identifier">ID: E6D1</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>COMPAORE Jean</h3>
+      <p class="identifier">ID: E5C9</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>DEMBELE Armel</h3>
+      <p class="identifier">ID: E8E2</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>DIAWARA Maysoon</h3>
+      <p class="identifier">ID: E1G4</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>DICKO Hamadou</h3>
+      <p class="identifier">ID: E3H6</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>GNOU Arouna</h3>
+      <p class="identifier">ID: E7I0</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>GO Moumouni</h3>
+      <p class="identifier">ID: E0J5</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>GOUBA Jonathan</h3>
+      <p class="identifier">ID: E4K2</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>KABORE Franck</h3>
+      <p class="identifier">ID: E9L8</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>KAFANDO Traïmounata</h3>
+      <p class="identifier">ID: E2M3</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>KAMBIRE Yann</h3>
+      <p class="identifier">ID: E6N7</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>KOMBO Saviola</h3>
+      <p class="identifier">ID: E5O1</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>KORSAGA Elie</h>
+      <p class="identifier">ID: E8P4</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>NANA Papy</h3>
+      <p class="identifier">ID: E1Q9</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>NIANGANE Joulkamaini</h3>
+      <p class="identifier">ID: E3R2</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>OUATTARA Alpha</h3>
+      <p class="identifier">ID: E7S6</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>OUEDRAOGO Alain</h3>
+      <p class="identifier">ID: E0T3</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>PANANDTIGRI Harouna</h3>
+      <p class="identifier">ID: E4U9</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>SANOLI Abdramane</h3>
+      <p class="identifier">ID: E9V1</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>SARAMBE Wahid</h3>
+      <p class="identifier">ID: E2W5</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>SAWADOGO Mohamine</h3>
+      <p class="identifier">ID: E6X0</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>TRAORE Prisca</h3>
+      <p class="identifier">ID: E5Y3</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>TRAORE Salif</h3>
+      <p class="identifier">ID: E8Z7</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>YONLI Martin</h3>
+      <p class="identifier">ID: E1A6</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>ZABRE Clovis</h3>
+      <p class="identifier">ID: E3B9</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>ZONGO Josaphat</h3>
+      <p class="identifier">ID: E7C2</p>
+    </div>
+
+    <div class="card">
+      <div class="chess-piece"></div>
+      <h3>ZOUGOURY Donald</h3>
+      <p class="identifier">ID: E0N0</p>
+    </div>
+  </body>
+</html>

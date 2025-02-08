@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ANAGRAMMDAYS - Mode Solo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-image: url("images/caroussel/bg3.jpg");
+        background-size: cover;
+        background-attachment: fixed;
+        color: #fff;
+        padding-top:110px; /* Ajouter un espace en haut pour éviter que la navbar ne cache des parties du jeu */
+      }
+      #game-container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px #aaa;
+      }
+      input,
+      button,
+      select {
+        margin-top: 10px;
+        padding: 10px;
+        width: 80%;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+      }
+      button {
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      .hidden {
+        display: none;
+      }
+      footer {
+        margin-top: 20px;
+        color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ajout de la navbar -->
+    <div id="navbar-placeholder"></div>
+    <script>
+      fetch("navbar_connect.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+        });
+    </script>
+    <!-- fin de la navbar -->
+
+    <div id="game-container">
+      <h1>ANAGRAMMDAYS - Mode Solo</h1>
+      <label for="difficulty">Choisissez un niveau :</label>
+      <select id="difficulty">
+        <option value="">-- Sélectionnez --</option>
+        <option value="facile">Facile</option>
+        <option value="intermediaire">Intermédiaire</option>
+        <option value="difficile">Difficile</option>
+      </select>
+      <button onclick="startGame()">Démarrer</button>
+      <p id="mixed-word" class="hidden"></p>
+      <input
+        id="user-input"
+        class="hidden"
+        type="text"
+        placeholder="Votre réponse"
+      />
+      <button id="submit-btn" class="hidden" onclick="checkAnswer()">
+        Valider
+      </button>
+      <p id="feedback"></p>
+      <p id="timer"></p>
+      <button id="replay-btn" class="hidden" onclick="startGame()">
+        Rejouer
+      </button>
+      <br />
+      <button onclick="showHelp()">Aide</button>
+      <button onclick="window.location.href='scrabble_game.html'">
+        Retour
+      </button>
+    </div>
+
+    <script>
+      const words = {
+        facile: [
+          "aimer",
+          "argent",
+          "avion",
+          "bon",
+          "chanson",
+          "courir",
+          "danser",
+          "dire",
+          "école",
+          "fleur",
+          "gagner",
+          "heureux",
+          "jouer",
+          "livre",
+          "maison",
+          "nager",
+          "ouvrir",
+          "parler",
+          "quitter",
+          "rire",
+          "soleil",
+          "terre",
+          "utiliser",
+          "voiture",
+          "wagon",
+          "xylophone",
+          "yoga",
+          "zèbre",
+          "abeille",
+          "bateau",
+          "chat",
+          "dormir",
+          "éléphant",
+          "forêt",
+          "gâteau",
+          "hiver",
+          "île",
+          "jardin",
+          "kiwi",
+          "lune",
+          "montagne",
+          "neige",
+          "océan",
+          "piano",
+          "quiche",
+          "rose",
+          "savon",
+          "tigre",
+          "uniforme",
+          "vache",
+        ],
+        intermediaire: [
+          "analyser",
+          "argument",
+          "attitude",
+          "bénéfice",
+          "capacité",
+          "choisir",
+          "construire",
+          "distinguer",
+          "expliquer",
+          "réfléchir",
+          "abstrait",
+          "bilingue",
+          "complexe",
+          "dynamique",
+          "économie",
+          "flexible",
+          "gestion",
+          "horizon",
+          "innovation",
+          "jugement",
+          "logique",
+          "méthode",
+          "négocier",
+          "objectif",
+          "pratique",
+          "qualité",
+          "réaliser",
+          "stratégie",
+          "technique",
+          "utilité",
+          "valeur",
+          "watt",
+          "xénophobe",
+          "yacht",
+          "zoologie",
+          "analyse",
+          "bénéfice",
+          "contexte",
+          "décision",
+          "efficacité",
+          "fonction",
+          "gestion",
+          "hypothèse",
+          "information",
+          "jugement",
+          "logique",
+          "méthode",
+          "négociation",
+          "objectif",
+          "projet",
+        ],
+        difficile: [
+          "abnégation",
+          "allégorie",
+          "ambiguïté",
+          "antagonisme",
+          "concomitant",
+          "corollaire",
+          "déroutant",
+          "exaltation",
+          "méandre",
+          "sophistiqué",
+          "anachronisme",
+          "bifurcation",
+          "cataclysme",
+          "dichotomie",
+        ],
+      };
+
+      const definitions = {
+        aimer:
+          "Éprouver de l'affection, de l'attachement ou de la passion pour quelqu'un ou quelque chose.",
+        argent:
+          "Métal précieux de couleur blanche et brillante, utilisé pour fabriquer des objets et des pièces de monnaie.",
+        avion:
+          "Appareil de transport aérien plus lourd que l'air, muni d'ailes et d'un moteur.",
+        bon: "Qui est agréable, bénéfique ou de qualité.",
+        chanson: "Composition musicale destinée à être chantée.",
+        courir: "Se déplacer rapidement en utilisant les jambes.",
+        danser:
+          "Effectuer des mouvements rythmés du corps, généralement sur de la musique.",
+        dire: "Exprimer par la parole.",
+        école: "Établissement où l'on dispense un enseignement collectif.",
+        fleur:
+          "Organe reproducteur des plantes à fleurs, souvent coloré et parfumé.",
+        gagner: "Obtenir un avantage, une victoire ou un profit.",
+        heureux: "Qui éprouve du bonheur, de la satisfaction.",
+        jouer: "Participer à une activité ludique ou sportive.",
+        livre: "Ouvrage imprimé formant un volume.",
+        maison: "Bâtiment destiné à l'habitation.",
+        nager: "Se déplacer dans l'eau en utilisant les mouvements du corps.",
+        ouvrir: "Faire passer de l'état fermé à l'état ouvert.",
+        parler: "Exprimer des pensées, des sentiments par la parole.",
+        quitter: "Cesser d'occuper un lieu, abandonner.",
+        rire: "Exprimer la gaieté par un mouvement des lèvres accompagné de sons saccadés.",
+        soleil:
+          "Étoile autour de laquelle gravite la Terre et qui éclaire et chauffe notre planète.",
+        terre: "Planète du système solaire habitée par l'homme.",
+        utiliser: "Faire usage de quelque chose.",
+        voiture: "Véhicule automobile destiné au transport des personnes.",
+        wagon:
+          "Véhicule ferroviaire destiné au transport des marchandises ou des passagers.",
+        xylophone:
+          "Instrument de musique à percussion composé de lames de bois ou de métal.",
+        yoga: "Discipline physique et mentale d'origine indienne visant à unifier le corps et l'esprit.",
+        zèbre: "Mammifère herbivore africain à robe rayée de noir et de blanc.",
+        abeille:
+          "Insecte hyménoptère vivant en colonies et produisant du miel.",
+        bateau: "Embarcation destinée à la navigation sur l'eau.",
+        chat: "Mammifère carnivore domestique de la famille des félidés.",
+        dormir:
+          "Être dans un état de repos caractérisé par une suspension de la conscience.",
+        éléphant: "Grand mammifère herbivore à trompe et à défenses.",
+        forêt: "Grande étendue de terrain couverte d'arbres.",
+        gâteau: "Préparation culinaire sucrée, généralement cuite au four.",
+        hiver: "Saison la plus froide de l'année.",
+        île: "Étendue de terre entourée d'eau.",
+        jardin: "Terrain où l'on cultive des plantes, des fleurs, des légumes.",
+        kiwi: "Fruit comestible de forme ovale et à peau brune et duveteuse.",
+        lune: "Satellite naturel de la Terre.",
+        montagne: "Élévation naturelle du sol, plus ou moins importante.",
+        neige: "Précipitation de cristaux de glace formant des flocons blancs.",
+        océan:
+          "Vaste étendue d'eau salée qui couvre une grande partie de la surface terrestre.",
+        piano: "Instrument de musique à clavier et à cordes frappées.",
+        quiche: "Tarte salée garnie de crème, d'œufs et de lardons.",
+        rose: "Fleur du rosier, souvent parfumée et de couleur variée.",
+        savon: "Produit utilisé pour le nettoyage et l'hygiène corporelle.",
+        tigre:
+          "Grand félin carnivore d'Asie, à pelage rayé de noir et d'orange.",
+        uniforme: "Vêtement identique porté par les membres d'un groupe.",
+        vache:
+          "Grand mammifère domestique élevé pour son lait, sa viande ou comme animal de trait.",
+        analyser: "Étudier en détail pour comprendre ou expliquer.",
+        argument: "Raison ou preuve avancée pour convaincre.",
+        attitude: "Manière de se tenir ou de se comporter.",
+        bénéfice: "Avantage ou profit tiré de quelque chose.",
+        capacité: "Aptitude à faire quelque chose.",
+        choisir: "Sélectionner parmi plusieurs options.",
+        construire: "Édifier ou assembler des éléments pour former un tout.",
+        distinguer:
+          "Percevoir une différence entre des choses ou des personnes.",
+        expliquer: "Rendre clair ou compréhensible.",
+        réfléchir: "Penser longuement et attentivement.",
+        abstrait: "Qui n'est pas concret, qui relève de la pensée pure.",
+        bilingue: "Qui parle couramment deux langues.",
+        complexe: "Composé de plusieurs éléments différents.",
+        dynamique: "Qui est en mouvement, qui évolue.",
+        économie:
+          "Science qui étudie la production, la distribution et la consommation des richesses.",
+        flexible: "Qui peut se plier sans se casser, qui s'adapte facilement.",
+        gestion: "Action de diriger ou d'administrer.",
+        horizon:
+          "Ligne imaginaire où le ciel et la terre semblent se rejoindre.",
+        innovation: "Introduction de quelque chose de nouveau.",
+        jugement: "Action de porter une appréciation sur quelque chose.",
+        logique: "Science du raisonnement correct.",
+        méthode: "Manière ordonnée de procéder pour atteindre un but.",
+        négocier: "Discuter pour parvenir à un accord.",
+        objectif: "But que l'on se propose d'atteindre.",
+        pratique: "Qui concerne l'action, l'application concrète.",
+        qualité: "Ensemble des propriétés d'une chose.",
+        réaliser: "Concrétiser, rendre réel.",
+        stratégie: "Art de coordonner des actions pour atteindre un but.",
+        technique:
+          "Ensemble des procédés utilisés dans un domaine particulier.",
+        utilité: "Caractère de ce qui est utile.",
+        valeur: "Importance accordée à quelque chose.",
+        watt: "Unité de mesure de la puissance.",
+        xénophobe: "Qui manifeste de l'hostilité envers les étrangers.",
+        yacht: "Bateau de plaisance de luxe.",
+        zoologie: "Science qui étudie les animaux.",
+        analyse: "Étude détaillée d'un sujet.",
+        contexte: "Ensemble des circonstances entourant un événement.",
+        décision: "Acte de choisir une option parmi plusieurs.",
+        efficacité: "Capacité à produire l'effet attendu.",
+        fonction: "Rôle ou activité propre à quelque chose.",
+        hypothèse: "Supposition à vérifier.",
+        information: "Ensemble des données sur un sujet.",
+        négociation: "Discussion pour parvenir à un accord.",
+        projet: "Plan ou intention de réaliser quelque chose.",
+        abnégation: "Sacrifice volontaire de soi-même.",
+        allégorie: "Représentation symbolique.",
+        ambiguïté: "Caractère de ce qui est équivoque.",
+        antagonisme: "Opposition entre deux forces.",
+        concomitant: "Qui se produit en même temps.",
+        corollaire: "Conséquence évidente.",
+        déroutant: "Qui déroute, qui surprend.",
+        exaltation: "État d'enthousiasme intense.",
+        méandre: "Sinuosité d'un cours d'eau.",
+        sophistiqué: "Très élaboré, complexe.",
+        anachronisme: "Erreur de chronologie.",
+        bifurcation: "Séparation en deux branches.",
+        cataclysme: "Catastrophe naturelle.",
+        dichotomie: "Division en deux parties opposées.",
+      };
+
+      let secretWord = "",
+        mixedWord = "",
+        attempts = 3,
+        timeLeft = 100,
+        timerInterval;
+
+      async function startGame() {
+        const difficulty = document.getElementById("difficulty").value;
+        if (!difficulty) {
+          document.getElementById("feedback").innerText =
+            "Veuillez choisir un niveau de difficulté.";
+          return;
+        }
+        const wordsList = words[difficulty];
+        secretWord = wordsList[Math.floor(Math.random() * wordsList.length)];
+        mixedWord = secretWord
+          .split("")
+          .sort(() => Math.random() - 0.5)
+          .join("");
+
+        document.getElementById("mixed-word").innerText =
+          "Mot mélangé : " + mixedWord;
+        document.getElementById("mixed-word").classList.remove("hidden");
+        document.getElementById("user-input").classList.remove("hidden");
+        document.getElementById("submit-btn").classList.remove("hidden");
+        document.getElementById("replay-btn").classList.add("hidden");
+        document.getElementById("feedback").innerText = "";
+
+        attempts = 3;
+        timeLeft = 100;
+        clearInterval(timerInterval);
+        updateTimer();
+        timerInterval = setInterval(updateTimer, 1000);
+      }
+
+      function updateTimer() {
+        document.getElementById(
+          "timer"
+        ).innerText = `Temps restant : ${timeLeft} secondes`;
+        if (timeLeft <= 0) {
+          endGame(false);
+        }
+        timeLeft--;
+      }
+
+      function checkAnswer() {
+        const userInput = document
+          .getElementById("user-input")
+          .value.toLowerCase();
+        if (userInput === secretWord) {
+          endGame(true);
+        } else {
+          attempts--;
+          if (attempts <= 0) {
+            endGame(false);
+          } else {
+            document.getElementById(
+              "feedback"
+            ).innerText = `Incorrect ! Il vous reste ${attempts} essais.`;
+          }
+        }
+      }
+
+      async function endGame(won) {
+        clearInterval(timerInterval);
+        const definition = definitions[secretWord] || "Définition non trouvée.";
+        document.getElementById("feedback").innerText = won
+          ? `Félicitations ! Vous avez trouvé le mot. Définition : ${definition}`
+          : `Désolé, vous avez perdu. Le mot était : ${secretWord}. Définition : ${definition}`;
+        document.getElementById("replay-btn").classList.remove("hidden");
+      }
+
+      function showHelp() {
+        alert(
+          "Bienvenue dans ANAGRAMMDAYS !\n\nChoisissez un niveau de difficulté et cliquez sur 'Démarrer'. Un mot mélangé apparaîtra. Tapez votre réponse et cliquez sur 'Valider'. Bonne chance !"
+        );
+      }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

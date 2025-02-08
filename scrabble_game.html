@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ANAGRAMMDAYS</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-image: url("images/caroussel/bg1.jpg");
+        background-size: cover;
+        background-attachment: fixed;
+        color: #fff;
+        padding-top:110px;/* Ajouter un espace en haut pour éviter que la navbar ne cache des parties du jeu */
+      }
+      #menu-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px #aaa;
+      }
+      button {
+        margin-top: 20px;
+        padding: 15px 30px;
+        font-size: 18px;
+        border-radius: 5px;
+        border: none;
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+     <!-- ajout de la navbar -->
+     <div id="navbar-placeholder"></div>
+     <script>
+       fetch("navbar_connect.html")
+         .then((response) => response.text())
+         .then((data) => {
+           document.getElementById("navbar-placeholder").innerHTML = data;
+         });
+     </script>
+     <!-- fin de la navbar -->
+    <div id="menu-container">
+      <h1>ANAGRAMMDAYS</h1>
+      <p>Bienvenue dans ANAGRAMMDAYS !</p>
+      <p>Choisissez un mode de jeu :</p>
+      <button onclick="window.location.href='scrabble_game_solo.html'">
+        Mode Solo
+      </button>
+      <button onclick="window.location.href='scrabble_game_multiplayer.html'">
+        Mode Multijoueur
+      </button>
+      <h2>Comment jouer :</h2>
+      <p>
+        Dans le mode solo, choisissez un niveau de difficulté et cliquez sur
+        'Démarrer'. Un mot mélangé apparaîtra. Tapez votre réponse et cliquez
+        sur 'Valider'.
+      </p>
+      <p>
+        Dans le mode multijoueur, le joueur 1 entre un mot et le joueur 2 doit
+        le deviner. Lors de la dernière tentative, le joueur 2 recevra un indice
+        avec la dernière lettre du mot.
+      </p>
+      <button onclick="showHelp()">Aide</button>
+    </div>
+
+    <script>
+      function showHelp() {
+        alert(
+          "Bienvenue dans ANAGRAMMDAYS !\n\nChoisissez un mode de jeu et suivez les instructions pour jouer. Bonne chance !"
+        );
+      }
+    </script>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+  </body>
+</html>

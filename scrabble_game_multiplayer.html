@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ANAGRAMMDAYS - Mode Multijoueur</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-image: url("images/caroussel/bg2.jpg");
+        background-size: cover;
+        background-attachment: fixed;
+        color: #fff;
+        padding-top:110px;/*Ajouter un espace en haut pour éviter que la navbar ne cache des parties du jeu */
+      }
+      #game-container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px #aaa;
+      }
+      input,
+      button,
+      select {
+        margin-top: 10px;
+        padding: 10px;
+        width: 80%;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+      }
+      button {
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ajout de la navbar -->
+    <div id="navbar-placeholder"></div>
+    <script>
+      fetch("navbar_connect.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+        });
+    </script>
+    <!-- fin de la navbar -->
+
+    <div id="game-container">
+      <h1>ANAGRAMMDAYS - Mode Multijoueur</h1>
+      <p id="player1-instructions">Joueur 1 : Entrez un mot pour le joueur 2</p>
+      <input
+        id="player1-word"
+        type="password"
+        placeholder="Entrez un mot"
+        oninput="maskInput(this)"
+      />
+      <button id="start-btn" onclick="startGame()">Jouer</button>
+      <p id="mixed-word" class="hidden"></p>
+      <input
+        id="user-input"
+        class="hidden"
+        type="text"
+        placeholder="Votre réponse"
+      />
+      <button id="submit-btn" class="hidden" onclick="checkAnswer()">
+        Valider
+      </button>
+      <p id="feedback"></p>
+      <p id="timer"></p>
+      <button id="replay-btn" class="hidden" onclick="resetGame()">
+        Rejouer
+      </button>
+      <br />
+      <button onclick="showHelp()">Aide</button>
+      <button onclick="window.location.href='scrabble_game.html'">
+        Retour
+      </button>
+    </div>
+
+    <script>
+      let secretWord = "",
+        mixedWord = "",
+        attempts = 3,
+        timeLeft = 100,
+        timerInterval;
+
+      function maskInput(input) {
+        const value = input.value;
+        input.dataset.realValue = value;
+        
+      }
+
+      function startGame() {
+        const player1WordInput = document.getElementById("player1-word");
+        secretWord = player1WordInput.dataset.realValue.toLowerCase();
+        if (!secretWord) {
+          document.getElementById("feedback").innerText =
+            "Veuillez entrer un mot.";
+          return;
+        }
+        mixedWord = secretWord
+          .split("")
+          .sort(() => Math.random() - 0.5)
+          .join("");
+
+        document.getElementById("player1-instructions").classList.add("hidden");
+        player1WordInput.classList.add("hidden");
+        document.getElementById("start-btn").classList.add("hidden");
+        document.getElementById("mixed-word").innerText =
+          "Mot mélangé : " + mixedWord;
+        document.getElementById("mixed-word").classList.remove("hidden");
+        document.getElementById("user-input").classList.remove("hidden");
+        document.getElementById("submit-btn").classList.remove("hidden");
+        document.getElementById("replay-btn").classList.add("hidden");
+        document.getElementById("feedback").innerText =
+          "Joueur 2 : C'est votre tour !";
+
+        attempts = 3;
+        timeLeft = 100;
+        clearInterval(timerInterval);
+        updateTimer();
+        timerInterval = setInterval(updateTimer, 1000);
+      }
+
+      function resetGame() {
+        document
+          .getElementById("player1-instructions")
+          .classList.remove("hidden");
+        const player1WordInput = document.getElementById("player1-word");
+        player1WordInput.classList.remove("hidden");
+        player1WordInput.value = "";
+        player1WordInput.dataset.realValue = "";
+        document.getElementById("start-btn").classList.remove("hidden");
+        document.getElementById("mixed-word").classList.add("hidden");
+        document.getElementById("user-input").classList.add("hidden");
+        document.getElementById("submit-btn").classList.add("hidden");
+        document.getElementById("replay-btn").classList.add("hidden");
+        document.getElementById("feedback").innerText = "";
+        clearInterval(timerInterval);
+      }
+
+      function updateTimer() {
+        document.getElementById(
+          "timer"
+        ).innerText = `Temps restant : ${timeLeft} secondes`;
+        if (timeLeft <= 0) {
+          endGame(false);
+        }
+        timeLeft--;
+      }
+
+      function checkAnswer() {
+        const userInput = document
+          .getElementById("user-input")
+          .value.toLowerCase();
+        if (userInput === secretWord) {
+          endGame(true);
+        } else {
+          attempts--;
+          if (attempts <= 0) {
+            endGame(false);
+          } else {
+            document.getElementById(
+              "feedback"
+            ).innerText = `Incorrect ! Il vous reste ${attempts} essais.`;
+            if (attempts === 1) {
+              document.getElementById(
+                "feedback"
+              ).innerText += ` Indice : La dernière lettre est "${secretWord.slice(
+                -1
+              )}".`;
+            }
+          }
+        }
+      }
+
+      function endGame(won) {
+        clearInterval(timerInterval);
+        document.getElementById("feedback").innerText = won
+          ? "Félicitations ! Vous avez trouvé le mot."
+          : `Désolé, vous avez perdu. Le mot était : ${secretWord}.`;
+        document.getElementById("replay-btn").classList.remove("hidden");
+      }
+
+      function showHelp() {
+        alert(
+          "Bienvenue dans ANAGRAMMDAYS - Mode Multijoueur !\n\nJoueur 1 : Entrez un mot et cliquez sur 'Jouer'. Le mot sera mélangé et le joueur 2 devra le deviner. Bonne chance !"
+        );
+      }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

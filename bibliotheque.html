@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bibliothèque</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ajout de la navbar -->
+    <div id="navbar-placeholder"></div>
+    <script>
+      fetch("navbar_connect.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+        });
+    </script>
+    <!-- fin de la navbar -->
+    <div class="container" style="margin-top: 100px; text-align: center">
+      
+      <h3>
+        Bienvenue dans la bibliothèque du Board Gamer Club. Vous trouverez ici
+        une collection de livres sur les jeux de société.
+      </h3>
+      <!-- Ajouter du contenu pour la bibliothèque -->
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="ressources/bibliotheque/book1.jpg"
+              class="card-img-top"
+              alt="Book 1"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Titre du Livre 1</h5>
+              <p class="card-text">
+                Description du Livre 1. Ce livre couvre les bases des échecs et
+                est parfait pour les débutants.
+              </p>
+              <a
+                href="ressources/bibliotheque/book1.pdf"
+                class="btn btn-primary"
+                download
+                >Télécharger</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="ressources/bibliotheque/book2.jpg"
+              class="card-img-top"
+              alt="Book 2"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Titre du Livre 2</h5>
+              <p class="card-text">
+                Description du Livre 2. Ce livre explore les stratégies avancées
+                pour les joueurs intermédiaires.
+              </p>
+              <a
+                href="ressources/bibliotheque/book2.pdf"
+                class="btn btn-primary"
+                download
+                >Télécharger</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="ressources/bibliotheque/book3.jpg"
+              class="card-img-top"
+              alt="Book 3"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Titre du Livre 3</h5>
+              <p class="card-text">
+                Description du Livre 3. Un guide complet pour les joueurs
+                avancés souhaitant perfectionner leur jeu.
+              </p>
+              <a
+                href="ressources/bibliotheque/book3.pdf"
+                class="btn btn-primary"
+                download
+                >Télécharger</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="ressources/bibliotheque/book4.jpg"
+              class="card-img-top"
+              alt="Book 4"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Titre du Livre 4</h5>
+              <p class="card-text">
+                Description du Livre 4. Ce livre est un guide pour les joueurs
+                débutants souhaitant apprendre les bases du jeu de dames.
+              </p>
+              <a
+                href="ressources/bibliotheque/book4.pdf"
+                class="btn btn-primary"
+                download
+                >Télécharger</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="ressources/bibliotheque/book5.jpg"
+              class="card-img-top"
+              alt="Book 5"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Titre du Livre 5</h5>
+              <p class="card-text">
+                Description du Livre 5. Un livre sur les stratégies avancées
+                pour les joueurs de scrabble.
+              </p>
+              <a
+                href="ressources/bibliotheque/book5.pdf"
+                class="btn btn-primary"
+                download
+                >Télécharger</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="ressources/bibliotheque/book6.jpg"
+              class="card-img-top"
+              alt="Book 6"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Titre du Livre 6</h5>
+              <p class="card-text">
+                Description du Livre 6. Un guide complet pour les joueurs
+                avancés de dames souhaitant perfectionner leur jeu.
+              </p>
+              <a
+                href="ressources/bibliotheque/book6.pdf"
+                class="btn btn-primary"
+                download
+                >Télécharger</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="ressources/bibliotheque/book7.jpg"
+              class="card-img-top"
+              alt="Book 7"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Titre du Livre 7</h5>
+              <p class="card-text">
+                Description du Livre 7. Ce livre explore les techniques de jeu
+                avancées pour les échecs.
+              </p>
+              <a
+                href="ressources/bibliotheque/book7.pdf"
+                class="btn btn-primary"
+                download
+                >Télécharger</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="ressources/bibliotheque/book8.jpg"
+              class="card-img-top"
+              alt="Book 8"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Titre du Livre 8</h5>
+              <p class="card-text">
+                Description du Livre 8. Un livre sur les stratégies de jeu pour
+                les joueurs intermédiaires de scrabble.
+              </p>
+              <a
+                href="ressources/bibliotheque/book8.pdf"
+                class="btn btn-primary"
+                download
+                >Télécharger</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="ressources/bibliotheque/book9.jpg"
+              class="card-img-top"
+              alt="Book 9"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Titre du Livre 9</h5>
+              <p class="card-text">
+                Description du Livre 9. Un guide pour les débutants souhaitant
+                apprendre les bases du jeu de scrabble.
+              </p>
+              <a
+                href="ressources/bibliotheque/book9.pdf"
+                class="btn btn-primary"
+                download
+                >Télécharger</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="ressources/bibliotheque/book10.jpg"
+              class="card-img-top"
+              alt="Book 10"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Titre du Livre 10</h5>
+              <p class="card-text">
+                Description du Livre 10. Un livre sur les techniques avancées
+                pour les joueurs de dames.
+              </p>
+              <a
+                href="ressources/bibliotheque/book10.pdf"
+                class="btn btn-primary"
+                download
+                >Télécharger</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="ressources/bibliotheque/book11.jpg"
+              class="card-img-top"
+              alt="Book 11"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Titre du Livre 11</h5>
+              <p class="card-text">
+                Description du Livre 11. Un guide pour les joueurs avancés de
+                scrabble souhaitant perfectionner leur jeu.
+              </p>
+              <a
+                href="ressources/bibliotheque/book11.pdf"
+                class="btn btn-primary"
+                download
+                >Télécharger</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="ressources/bibliotheque/book12.jpg"
+              class="card-img-top"
+              alt="Book 12"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Titre du Livre 12</h5>
+              <p class="card-text">
+                Description du Livre 12. Un livre sur les stratégies de jeu pour
+                les joueurs intermédiaires de dames.
+              </p>
+              <a
+                href="ressources/bibliotheque/book12.pdf"
+                class="btn btn-primary"
+                download
+                >Télécharger</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="ressources/bibliotheque/book13.jpg"
+              class="card-img-top"
+              alt="Book 13"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Titre du Livre 13</h5>
+              <p class="card-text">
+                Description du Livre 13. Un guide complet pour les joueurs
+                avancés de scrabble souhaitant perfectionner leur jeu.
+              </p>
+              <a
+                href="ressources/bibliotheque/book13.pdf"
+                class="btn btn-primary"
+                download
+                >Télécharger</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
