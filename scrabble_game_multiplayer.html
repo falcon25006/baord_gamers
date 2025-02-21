@@ -18,7 +18,7 @@
         background-size: cover;
         background-attachment: fixed;
         color: #fff;
-        padding-top:110px;/*Ajouter un espace en haut pour éviter que la navbar ne cache des parties du jeu */
+        padding-top: 90px; /* Ajouter un espace en haut pour éviter que la navbar ne cache des parties du jeu */
       }
       #game-container {
         max-width: 600px;
@@ -68,7 +68,7 @@
       <p id="player1-instructions">Joueur 1 : Entrez un mot pour le joueur 2</p>
       <input
         id="player1-word"
-        type="password"
+        type="text"
         placeholder="Entrez un mot"
         oninput="maskInput(this)"
       />
@@ -104,13 +104,14 @@
 
       function maskInput(input) {
         const value = input.value;
+        input.value = "*".repeat(value.length);
         input.dataset.realValue = value;
-        
       }
 
       function startGame() {
-        const player1WordInput = document.getElementById("player1-word");
-        secretWord = player1WordInput.dataset.realValue.toLowerCase();
+        secretWord = document
+          .getElementById("player1-word")
+          .dataset.realValue.toLowerCase();
         if (!secretWord) {
           document.getElementById("feedback").innerText =
             "Veuillez entrer un mot.";
@@ -122,7 +123,7 @@
           .join("");
 
         document.getElementById("player1-instructions").classList.add("hidden");
-        player1WordInput.classList.add("hidden");
+        document.getElementById("player1-word").classList.add("hidden");
         document.getElementById("start-btn").classList.add("hidden");
         document.getElementById("mixed-word").innerText =
           "Mot mélangé : " + mixedWord;
@@ -144,10 +145,9 @@
         document
           .getElementById("player1-instructions")
           .classList.remove("hidden");
-        const player1WordInput = document.getElementById("player1-word");
-        player1WordInput.classList.remove("hidden");
-        player1WordInput.value = "";
-        player1WordInput.dataset.realValue = "";
+        document.getElementById("player1-word").classList.remove("hidden");
+        document.getElementById("player1-word").value = "";
+        document.getElementById("player1-word").dataset.realValue = "";
         document.getElementById("start-btn").classList.remove("hidden");
         document.getElementById("mixed-word").classList.add("hidden");
         document.getElementById("user-input").classList.add("hidden");

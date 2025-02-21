@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="descriptions"content="Baord gamer le club de jeu de société de l'ecole polytechnique de ouagadougou epo le club
     regoupe les passionnées d'échecs de scrabble et de dame">
-    <title>Baord Gamer club de jeux de société de l'Ecole Polytechnique de Ouagadougou </title>
+    <title>Board Gamer club de jeux de société de l'Ecole Polytechnique de Ouagadougou </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
     <style>
@@ -105,7 +105,7 @@
       <footer class="footer">
         <div class="footer-content">
             <div class="footer-info">
-                <p>© 2024 BAORD GAMER </p>
+                <p>© 2024 BOARD GAMER </p>
                 <p>MADE BY: <br>OUEDRAOGO YANN <br> ZOUGOURY DONALD <br> LOARI MOUMOUNI</p>
                 <p>Date de création: 25 octobre 2024</p>
                 <p>Déployé grâce à : GITHUB</p>
@@ -130,6 +130,45 @@
          .then(data => {
            document.getElementById('navbar-placeholder').innerHTML = data;
          });
+         function showPopup() {
+        Swal.fire({
+          title: "EPO CHESS TOURNAMENT",
+          html: `
+            <div style="text-align: center;">
+              <p style="text-align: center;">Inscrivez-vous vite!</p>
+              <img src="images/image_échecs/background.png" alt="Exemple" style="width:400px; border-radius:10px;">
+              <br><br>
+              <p style="text-align: center;">Plus d'info dans l'onglet tournois</p>
+            </div>
+          `,
+          showConfirmButton: false,
+          showCloseButton: true,
+          heightAuto: false, // Augmenter la hauteur de la pop-up
+        });
+      }
+
+      function schedulePopups(initialDelay, increment) {
+        let delay = initialDelay;
+        let count = 1;
+
+        function scheduleNextPopup() {
+          setTimeout(() => {
+            showPopup();
+            delay += increment * count;
+            count++;
+            scheduleNextPopup();
+          }, delay);
+        }
+
+        scheduleNextPopup();
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          showPopup();
+          schedulePopups(120000, 240000); // 2 minutes initial delay, 4 minutes increment
+        }, 80000); // Initial pop-up after 5 seconds
+      });
      </script>
      <!-- fin -->
 </body>

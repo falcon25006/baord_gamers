@@ -14,36 +14,72 @@
       .chess-board {
         width: 400px;
         height: 400px;
-        border: 2px solid #333;
+        border: 2px solid #000;
         display: grid;
         grid-template-columns: repeat(8, 1fr);
+        margin: 0 auto;
+        position: relative;
+        border-radius: 10px; /* Slightly round the corners */
       }
+
       .square {
         width: 50px;
         height: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 30px;
+        font-size: 35px;
         cursor: pointer;
+        position: relative;
       }
+
       .white {
-        background-color: #f0d9b5;
+        background-color: #ffffff;
       }
-      .black {
-        background-color: #b58863;
+
+      .blue {
+        background-color: #a6c0d8;
       }
+
       .selected {
         background-color: #7fff00;
       }
+
       .possible-move {
         background-color: #ff7f50;
+      }
+
+      .piece-white {
+        color: #ffffff;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+          1px 1px 0 #000;
+      }
+
+      .piece-black {
+        color: #000000;
+      }
+
+      .notation-rank {
+        position: absolute;
+        right: -20px;
+        font-size: 12px;
+        color: #666;
+      }
+
+      .notation-file {
+        position: absolute;
+        bottom: -20px;
+        font-size: 12px;
+        color: #666;
+      }
+
+      h1 {
+        text-align: center;
       }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
-    <!-- ajout de la navbar -->
     <div id="navbar-placeholder"></div>
 
     <script>
@@ -53,9 +89,8 @@
           document.getElementById("navbar-placeholder").innerHTML = data;
         });
     </script>
-    <!-- fin -->
+
     <div class="head" style="margin-top: 70px">
-      <!-- la div c'est pour éviter de cacher la haut du site prière d'écrire la suite du code à l'intérieur-->
       <h1>Jeu d'Échecs en Ligne</h1>
       <div class="chess-board" id="chessBoard"></div>
 
@@ -94,11 +129,29 @@
             for (let col = 0; col < 8; col++) {
               const square = document.createElement("div");
               square.classList.add("square");
-              square.classList.add((row + col) % 2 === 0 ? "white" : "black");
+              square.classList.add((row + col) % 2 === 0 ? "white" : "blue");
+
               const piece = gameState[row][col];
               if (piece !== " ") {
                 square.textContent = pieces[piece];
+                square.classList.add(
+                  piece === piece.toUpperCase() ? "piece-white" : "piece-black"
+                );
               }
+
+              if (col === 7) {
+                const rank = document.createElement("div");
+                rank.classList.add("notation-rank");
+                rank.textContent = 8 - row;
+                square.appendChild(rank);
+              }
+              if (row === 7) {
+                const file = document.createElement("div");
+                file.classList.add("notation-file");
+                file.textContent = String.fromCharCode(97 + col);
+                square.appendChild(file);
+              }
+
               square.addEventListener("click", () =>
                 handleSquareClick(row, col)
               );
@@ -263,21 +316,22 @@
 
         createBoard();
       </script>
+
       <script>
         function showPopup() {
           Swal.fire({
             title: "EPO CHESS TOURNAMENT",
             html: `
-              <div style="text-align: center;">
-                <p style="text-align: center;">Inscrivez-vous vite!</p>
-                <img src="images/image_échecs/background.png" alt="Exemple" style="width:200px; border-radius:10px;">
-                <br><br>
-                <p style="text-align: center;">Plus d'info dans l'onglet tournois</p>
-              </div>
-            `,
+                        <div style="text-align: center;">
+                            <p style="text-align: center;">Inscrivez-vous vite!</p>
+                            <img src="images/image_échecs/background.png" alt="Exemple" style="width:200px; border-radius:10px;">
+                            <br><br>
+                            <p style="text-align: center;">Plus d'info dans l'onglet tournois</p>
+                        </div>
+                    `,
             showConfirmButton: false,
             showCloseButton: true,
-            heightAuto: false, // Augmenter la hauteur de la pop-up
+            heightAuto: false,
           });
         }
 
@@ -300,12 +354,12 @@
         document.addEventListener("DOMContentLoaded", () => {
           setTimeout(() => {
             showPopup();
-            schedulePopups(120000, 240000); // 2 minutes initial delay, 4 minutes increment
-          }, 5000); // Initial pop-up after 5 seconds
+            schedulePopups(120000, 240000);
+          }, 5000);
         });
       </script>
     </div>
-    <!-- fin de la div container -->
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
