@@ -1,7 +1,7 @@
 /* Styles de base */
 body, html {
     font-family: Arial, Helvetica, sans-serif;
-    background-image: linear-gradient(to top, #e9eef3 0%, hsl(0, 41%, 97%) 100%);
+    background-image: linear-gradient(to top, #eef0f1 0%, hsl(0, 41%, 97%) 100%);
     margin: 0;
     padding: 0;
     width: 100%;
@@ -36,7 +36,7 @@ p,h1,h2,h3,h4,h5 {
     line-height: 1.6; /* Ajuster la hauteur de ligne pour améliorer la lisibilité */
 
   }
- Styles pour les images 
+ /*Styles pour les images */
 img {
     max-width: 100%;
     height: auto;
@@ -51,13 +51,13 @@ img {
     margin: 20px 0;
 }
 
-/*
+
 .container img {
     width: calc(25% - 10px);
     height: calc(50% - 10px);
     max-width: 150px;
     transition: all ease-in-out 0.3s;}
-*/
+
 
 .container1 {
     display: flex;
@@ -67,13 +67,13 @@ img {
     margin: 20px 0;
 }
 
-/*
+
 
 .container img:hover {
 
     transform: scale(2.2);
 }
-*/
+
 /* Media queries pour la mise en page responsive */
 @media screen and (min-width: 768px) {
     .histoire1, .histoire2 {
