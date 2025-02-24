@@ -56,9 +56,9 @@ img {
     width: calc(25% - 10px);
     height: calc(50% - 10px);
     max-width: 150px;
-    transition: all ease-in-out 0.3s;
+    transition: all ease-in-out 0.3s;}
 */
-}
+
 .container1 {
     display: flex;
     display: flex;
@@ -74,7 +74,7 @@ img {
     transform: scale(2.2);
 }
 */
- Media queries pour la mise en page responsive 
+/* Media queries pour la mise en page responsive */
 @media screen and (min-width: 768px) {
     .histoire1, .histoire2 {
         width: calc(50% - 10px);
