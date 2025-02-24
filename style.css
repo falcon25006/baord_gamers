@@ -36,7 +36,7 @@ p,h1,h2,h3,h4,h5 {
     line-height: 1.6; /* Ajuster la hauteur de ligne pour améliorer la lisibilité */
 
   }
-/* Styles pour les images */
+ Styles pour les images 
 img {
     max-width: 100%;
     height: auto;
@@ -51,13 +51,13 @@ img {
     margin: 20px 0;
 }
 
-
+/*
 .container img {
     width: calc(25% - 10px);
     height: calc(50% - 10px);
     max-width: 150px;
     transition: all ease-in-out 0.3s;
-
+*/
 }
 .container1 {
     display: flex;
@@ -67,14 +67,14 @@ img {
     margin: 20px 0;
 }
 
-
+/*
 
 .container img:hover {
 
     transform: scale(2.2);
 }
-
-/* Media queries pour la mise en page responsive */
+*/
+ Media queries pour la mise en page responsive 
 @media screen and (min-width: 768px) {
     .histoire1, .histoire2 {
         width: calc(50% - 10px);
@@ -91,3 +91,4 @@ img {
        
     }
 }
+
