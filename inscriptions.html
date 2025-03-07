@@ -126,12 +126,60 @@
     ></script>
     <script>
       const validIds = [
-        "E4F7", "E9A3", "E2B8", "E6D1", "E5C9", "E8E2", "E1G4", "E3H6", "E7I0", "E0J5",
-        "E4K2", "E9L8", "E2M3", "E6N7", "E5O1", "E8P4", "E1Q9", "E3R2", "E7S6", "E0T3",
-        "E4U9", "E9V1", "E2W5", "E6X0", "E5Y3", "E8Z7", "E1A6", "E3B9", "E7C2", "E0D8",
-        "E4E1", "E9F5", "E2G0", "E6H3", "E5I7", "E8J2", "E1K8", "E3L1", "E7M5", "E0N0"
+        "E4F7",
+        "E9A3",
+        "E2B8",
+        "E6D1",
+        "E5C9",
+        "E8E2",
+        "E1G4",
+        "E3H6",
+        "E7I0",
+        "E0J5",
+        "E4K2",
+        "E9L8",
+        "E2M3",
+        "E6N7",
+        "E5O1",
+        "E8P4",
+        "E1Q9",
+        "E3R2",
+        "E7S6",
+        "E0T3",
+        "E4U9",
+        "E9V1",
+        "E2W5",
+        "E6X0",
+        "E5Y3",
+        "E8Z7",
+        "E1A6",
+        "E3B9",
+        "E7C2",
+        "E0D8",
+        "E4E1",
+        "E9F5",
+        "E2G0",
+        "E6H3",
+        "E5I7",
+        "E8J2",
+        "E1K8",
+        "E3L1",
+        "E7M5",
+        "E0N0",
       ];
-      let participants = JSON.parse(localStorage.getItem("participants")) || [];
+      let participants = JSON.parse(localStorage.getItem("participants")) || [
+        { playerId: "E4F7", firstName: "BATIONO", lastName: "Uriel" },
+        { playerId: "E9A3", firstName: "DIAWARA", lastName: "Maysoon" },
+        { playerId: "E2B8", firstName: "GOUBA", lastName: "Jonathan" },
+        { playerId: "E6D1", firstName: "KOMBO", lastName: "Saviola" },
+        { playerId: "E5C9", firstName: "KOULIDIATI", lastName: "Ange" },
+        { playerId: "E8E2", firstName: "LOARI", lastName: "Moumouni" },
+        { playerId: "E1G4", firstName: "NIGANE", lastName: "Joulkaniani" },
+        { playerId: "E3H6", firstName: "OUATTARA", lastName: "Sedikk" },
+        { playerId: "E7I0", firstName: "TRAORÉ", lastName: "Salif" },
+        { playerId: "E0J5", firstName: "ZEBA", lastName: "Eliakim" },
+        { playerId: "E4K2", firstName: "ZONGO", lastName: "Josaphat" },
+      ];
 
       function saveParticipantsToLocalStorage() {
         localStorage.setItem("participants", JSON.stringify(participants));
@@ -171,6 +219,7 @@
         messageElement.textContent = `Bonjour ${firstName} ${lastName}, votre inscription est confirmée !`;
         messageElement.style.color = "green";
         saveParticipantsToLocalStorage();
+        updateParticipantCount();
       }
 
       function unregisterParticipant() {
@@ -196,17 +245,18 @@
         messageElement.textContent = `${firstName} ${lastName} a été désinscrit avec succès.`;
         messageElement.style.color = "green";
         saveParticipantsToLocalStorage();
+        updateParticipantCount();
+      }
+
+      function updateParticipantCount() {
+        const messageElement = document.getElementById("message");
+        messageElement.textContent = `${participants.length} participant(s) inscrit(s).`;
+        messageElement.style.color =
+          participants.length === 0 ? "red" : "green";
       }
 
       window.onload = () => {
-        const messageElement = document.getElementById("message");
-        if (participants.length === 0) {
-          messageElement.textContent = "Aucun participant inscrit.";
-          messageElement.style.color = "red";
-        } else {
-          messageElement.textContent = `${participants.length} participant(s) inscrit(s).`;
-          messageElement.style.color = "green";
-        }
+        updateParticipantCount();
       };
     </script>
   </body>

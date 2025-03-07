@@ -79,7 +79,19 @@
       <div class="left">
         <div class="participants">
           <h1>Participants Inscrits</h1>
-          <ul id="participantsList"></ul>
+          <ul id="participantsList">
+            <li>1. BATIONO Uriel ✅</li>
+            <li>2. DIAWARA Maysoon ✅</li>
+            <li>3. GOUBA Jonathan ✅</li>
+            <li>4. KOMBO Saviola ✅</li>
+            <li>5. KOULIDIATI Ange ✅</li>
+            <li>6. LOARI Moumouni ✅</li>
+            <li>7. NIGANE Joulkaniani ✅</li>
+            <li>8. OUATTARA Sedikk ✅</li>
+            <li>9. TRAORÉ Salif ✅</li>
+            <li>10. ZEBA Eliakim ✅</li>
+            <li>11. ZONGO Josaphat ✅</li>
+          </ul>
         </div>
         <!--<div class="appariements" style="margin-top: 100px">
           <h1>Appariements</h1>
@@ -92,8 +104,8 @@
             </thead>
             <tbody id="pairingsList">
                Les appariements seront ajoutés ici -->
-              <!-- Exemple d'appariement -->
-              <!-- <tr>
+        <!-- Exemple d'appariement -->
+        <!-- <tr>
                 <td>Participant Blanc</td>
                 <td>Participant Noir</td>
               </tr> 
@@ -132,9 +144,9 @@
           <a href="https://lichess.org" target="_blank">https://lichess.org</a>
           et créez-en un gratuitement.
           <br />
-          2. Rejoindre la ligue  : Rejoindre la ligue  sur Lichess pour
-          tous les participants. Les liens d’intégration vous seront
-          communiqués ultérieurement.
+          2. Rejoindre la ligue : Rejoindre la ligue sur Lichess pour tous les
+          participants. Les liens d’intégration vous seront communiqués
+          ultérieurement.
           <br /><br />
           <strong>Déroulement des Rounds</strong>
           <br />
@@ -142,7 +154,8 @@
           <br />
           - La cadence est de 15 min (rapide)
           <br />
-          - 2 round en présentiel : Obligatoire pour tous les participants le 22 Mars.
+          - 2 round en présentiel : Obligatoire pour tous les participants le 22
+          Mars.
           <br />
           - 2 rounds en ligne : À jouer le 21 Mars .
           <br />
@@ -151,22 +164,24 @@
           <br /><br />
           <strong>Soumission des Résultats</strong>
           <br />
-          - Toutes les parties jouées en ligne seront vérifier pour controler la triche.
+          - Toutes les parties jouées en ligne seront vérifier pour controler la
+          triche.
           <br />
           - Les règles de fair-play seront strictement appliquées. Toute
           tentative de triche sera sanctionnée.
           <br /><br />
           <strong>Récompenses</strong>
           <br />
-          - Les 3 premiers du classement final seront récompensés par des médailles , des échiquiers et 
-          des inscriptions a la Féderation Burkinabè de Jeu d'Echecs FBJE .
+          - Les 3 premiers du classement final seront récompensés par des
+          médailles , des échiquiers et des inscriptions a la Féderation
+          Burkinabè de Jeu d'Echecs FBJE .
           <br /><br />
           <strong>Rappel Important</strong>
           <br />
           Ce tournoi vise à promouvoir l’esprit de compétition, le respect des
           règles et le plaisir de jouer. Nous comptons sur votre engagement et
           votre fair-play pour faire de cet événement une réussite.
-          <br /><br />                                                    
+          <br /><br />
           Préparez vos échiquiers, rejoignez la ligue, et que la meilleure
           stratégie triomphe !
           <br /><br />
@@ -182,17 +197,30 @@
     ></script>
     <script>
       function loadParticipants() {
-        const participants =
-          JSON.parse(localStorage.getItem("participants")) || [];
+        const participants = [
+          { firstName: "BATIONO", lastName: "Uriel" },
+          { firstName: "DIAWARA", lastName: "Maysoon" },
+          { firstName: "GOUBA", lastName: "Jonathan" },
+          { firstName: "KOMBO", lastName: "Saviola" },
+          { firstName: "KOULIDIATI", lastName: "Ange" },
+          { firstName: "LOARI", lastName: "Moumouni" },
+          { firstName: "NIGANE", lastName: "Joulkaniani" },
+          { firstName: "OUATTARA", lastName: "Sedikk" },
+          { firstName: "TRAORÉ", lastName: "Salif" },
+          { firstName: "ZEBA", lastName: "Eliakim" },
+          { firstName: "ZONGO", lastName: "Josaphat" },
+        ];
         displayParticipants(participants);
       }
 
       function displayParticipants(participants) {
         const participantsList = document.getElementById("participantsList");
         participantsList.innerHTML = "";
-        participants.forEach((participant) => {
+        participants.forEach((participant, index) => {
           const listItem = document.createElement("li");
-          listItem.textContent = `${participant.firstName} ${participant.lastName}`;
+          listItem.textContent = `${index + 1}. ${participant.firstName} ${
+            participant.lastName
+          } `;
           participantsList.appendChild(listItem);
         });
       }
